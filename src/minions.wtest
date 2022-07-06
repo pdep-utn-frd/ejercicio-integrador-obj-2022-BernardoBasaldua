@@ -1,9 +1,11 @@
-
+import minions.*
+import villanos.*
+import maldades.*
 
 describe "Test Minions"{
-
-	var arma1 = new Arma(nombre = "Pistola", poder = 5)
-	var arma2 = new Arma(nombre = "Bazooka", poder = 10)
+	var gru = new Villanos()
+	var arma1 = new Arma(nombre = "Pistola", potencia = 5)
+	var arma2 = new Arma(nombre = "Bazooka", potencia = 10)
 	var steve = new Minion(bananas = 0)
 	var jon = new Minion(bananas = 10)
 	
@@ -15,7 +17,7 @@ describe "Test Minions"{
 		assert.that(steve.armas().isEmpty())
 	}
 	test "steve tiene una bazooka"{
-		steve.otorgarArma(arma2)
+		gru.otorgarArma(arma2, steve)
 		assert.that(steve.tieneArma("Bazooka"))
 	}
 	test "se le agrega 5 armas a steve, que ya tenia 1 arma"{
@@ -23,12 +25,12 @@ describe "Test Minions"{
 		assert.equals(5, steve.armas().size())
 	}
 	test "se le agrega 15 bananas a steve y come 5 "{
-		steve.alimentar(15)
-		5.times({a=>steve.comerBanana()})
+		gru.alimentar(steve, 15)
+		5.times({a=>steve.agregarBananas()})
 		assert.equals(10, steve.bananas())
 	}
 	test "se le agregan 5 armas a steve y es peligroso"{
-		self.agregarArmas()	
+		steve.agregarArmas()	
 		assert.that(steve.esPeligroso())
 	}
 	test "Steve es de color amarillo"{
@@ -57,11 +59,11 @@ describe "Test Minions"{
 	}
 	test "el nivel de concentracion de Jon es 15 "{
 		jon.otorgarArma(arma1)
-		assert.equals(15, jon.nivelConcentracion())
+		assert.equals(15, jon.nivelDeConcentracion())
 	}
 	test "jon toma en suero y su nivel de concentracion es 9"{
 		jon.consumirSueroMutante()
-		assert.equals(9,jon.nivelConcentracion())
+		assert.equals(9,jon.nivelDeConcentracion())
 	}
 	test "jon tiene una pistola en su armamento"{
 		jon.otorgarArma(arma1)
